@@ -1,0 +1,27 @@
+{
+  "name": "sonar",
+  "version": "1.0.0",
+  "description": "Music recommendation based on rym data",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "npm run build:live",
+    "build": "tsc -p ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^10.12.18",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "@types/moment": "^2.13.0",
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.9"
+  }
+}
