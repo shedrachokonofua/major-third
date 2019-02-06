@@ -46,5 +46,3 @@ function getByRowTitle($, title: string):string {
   });
   return row.find('td').first().text().trim();
 }
-
-getAlbumDetails('/release/album/pink-floyd/meddle-1/');

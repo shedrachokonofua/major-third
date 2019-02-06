@@ -18,7 +18,7 @@ export default new Schema({
     default: []
   }],
   meta: {
-    type: Types.Mixed,
+    type: Schema.Types.Mixed,
     default: {}
   }
 });

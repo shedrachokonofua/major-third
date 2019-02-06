@@ -19,4 +19,8 @@ export interface RymMeta {
     name: string,
     href: string
   }[];
+  releaseDate?: Date;
+  nRatings?: Number;
+  languages?: string[];
+  html?: string;
 }

@@ -10,7 +10,6 @@ export default async function getChart({ page = 1, year, genres }:ChartData):Pro
   baseUrl.searchParams.append('page', page.toString());
   if(year) baseUrl.searchParams.append('year', year.toString());
   if(genres) baseUrl.searchParams.append('genres', genres);
-
   const response = await axios.get(baseUrl.href);
   const html = response.data;
   return getAlbums(html);
@@ -53,5 +52,3 @@ function getAlbums(html):Album[] {
   console.log(albums);
   return albums;
 }
-
-getChart({})
