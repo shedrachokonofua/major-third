@@ -3,5 +3,5 @@ export default interface Album {
   artists: string[];
   genres: string[];
   descriptors?: string[];
-  meta?: object;
+  meta?: any;
 }
