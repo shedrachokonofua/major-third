@@ -9,8 +9,8 @@ export default async function(job) {
   delete details.descriptors;
 
   const album = await Album.findById(id);
-  album.descriptors = album.descriptors.concat(descriptors);
-  album.meta.rym = Object.assign(album.meta.rym, details);
+  album.descriptors = album.descriptors.concat(descriptors); 
+  album.meta.rym = details;
   await album.save();
   return;
 }
