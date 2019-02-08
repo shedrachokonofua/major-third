@@ -5,8 +5,8 @@ import getAlbumDetails from './getAlbumDetails';
 export default function() {
   const Queue = new Bull('rym', {
     limiter: {
-      max: 1,
-      duration: 1000*60
+      max: 20,
+      duration: 1000*60*30
     }
   });
   
