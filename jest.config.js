@@ -15,5 +15,5 @@ module.exports = {
     "json",
     "node"
   ],
-  "setupTestFrameworkScriptFile": "./tests/setup.js"
+  //"setupTestFrameworkScriptFile": "./tests/setup.js"
 }

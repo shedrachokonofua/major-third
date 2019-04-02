@@ -9,7 +9,7 @@ export interface AlbumDetails {
 export interface ChartData {
   page?:number;
   year?:number;
-  genres?:string;
+  genre?:string;
 }
 
 export interface RymMeta {
