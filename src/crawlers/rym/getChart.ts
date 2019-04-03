@@ -4,18 +4,18 @@ import Album from '../../modules/album/album';
 import * as cheerio from 'cheerio';
 import { ChartData, RymMeta } from './rym';
 
-export default async function getChart({ page = 1, year, genres }:ChartData):Promise<Album[]>  {
+export default async function getChart({ page = 1, year, genre }:ChartData):Promise<Album[]>  {
   const baseUrl:URL = new URL('https://rateyourmusic.com/customchart');
 
   baseUrl.searchParams.append('page', page.toString());
   if(year) baseUrl.searchParams.append('year', year.toString());
-  if(genres) baseUrl.searchParams.append('genres', genres);
+  if(genre) baseUrl.searchParams.append('genres', genre);
   const response = await axios.get(baseUrl.href);
   const html = response.data;
   return getAlbums(html);
 }
 
-function getAlbums(html):Album[] {
+export function getAlbums(html):Album[] {
   const albums:Album[] = [];
   const $ = cheerio.load(html);
   const chart = $('table.mbgen');
@@ -35,11 +35,11 @@ function getAlbums(html):Album[] {
     const name = $(this).find('a.album').text();
     const href = $(this).find('a.album').attr('href');
     const genres = $(this).find('a.genre').map((i, elem) => $(elem).text()).get();
-    const rating = $(this).find('.chart_stats > a:first-of-type > b:first-of-type').text()
+    const rating = $(this).find('.chart_stats > a:first-of-type > b:first-of-type').text();
 
     const rym:RymMeta = {
       href,
-      rating,
+      rating: parseFloat(rating),
       artistsHref: artists
     };
     albums.push({  
@@ -48,7 +48,6 @@ function getAlbums(html):Album[] {
       artists: artistNames,
       meta: { rym }
     });
-  })
-  console.log(albums);
+  });
   return albums;
 }
