@@ -18,20 +18,18 @@ async function getPage(href:string):Promise<string> {
   return html;
 }
 
-function getDetails(html:string):AlbumDetails {
+export function getDetails(html:string):AlbumDetails {
   const $ = cheerio.load(html);
   const albumInfoTable = $('.album_info');
   const rawDate = getByRowTitle($, 'Released');
-  const releaseDate = moment(rawDate, 'D MMMM YYYY').toDate();
   const nRatingsRaw = albumInfoTable.find('.num_ratings > b').text();
-  const nRatings:number = parseInt(nRatingsRaw.replace(',', '').replace(' ', ''));
-  const descriptors:string[] = getByRowTitle($, 'Descriptors').split(', ').map(desc => desc.trim());
-  const languages:string[] = getByRowTitle($, 'Language').split(', ').map(desc => desc.trim());
+  
   const details:AlbumDetails = {
-    releaseDate,
-    nRatings,
-    descriptors,
-    languages,
+    releaseDate: moment(rawDate, 'D MMMM YYYY').toDate(),
+    nRatings: parseInt(nRatingsRaw.replace(',', '').replace(' ', '')),
+    descriptors: getListRow($, 'Descriptors'),
+    languages: getListRow($, 'Language'),
+    secondaryGenres: getSecondaryGenres($),
     html
   };
   return details;
@@ -45,4 +43,16 @@ function getByRowTitle($, title: string):string {
     return rowTitle == title;
   });
   return row.find('td').first().text().trim();
+}
+
+function getListRow($, name): string[] {
+  const row = getByRowTitle($, name);
+  if(row === '') return [];
+  return row.split(', ').map(item => item.trim());
+}
+
+function getSecondaryGenres($): string[] {
+  const secondaryGenresList = $('.release_sec_genres > a');
+  const secondaryGenres = secondaryGenresList.map((i, elem) => $(elem).text()).get();
+  return secondaryGenres;
 }

@@ -4,6 +4,7 @@ export interface AlbumDetails {
   descriptors: string[];
   languages: string[];
   html: string;
+  secondaryGenres: string[];
 }
 
 export interface ChartData {
