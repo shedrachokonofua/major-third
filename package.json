@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@types/jest": "^24.0.11",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "bull": "^3.6.0",
     "bull-arena": "^2.6.2",
     "cheerio": "^1.0.0-rc.2",
